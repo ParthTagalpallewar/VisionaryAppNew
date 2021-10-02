@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Visionary</string>
+
+    <string name="API_KEY">AIzaSyA6DI0RywdiwKfXTzptPUelPsbQZdMKS_4</string>
+
+    <!--Bottom Navigation-->
+    <string name="title_home">Home</string>
+    <string name="title_books">Books</string>
+    <string name="title_add">Add Book</string>
+    <string name="title_profile">Profile</string>
+
+
+    <string name="register">REGISTER</string>
+    <string name="login_phone_hint">Enter Number here</string>
+    <string name="login_password_hint">         Enter Your Password here</string>
+    <string name="signup_login_hint"> Sign In</string>
+    <string name="alreadyHaveAccout">Already have an account?</string>
+    <string name="dontHaveAccout">Don\'t have an account?</string>
+    <string name="login_signup_hint"> Sign Up</string>
+    <string name="name">Enter Your Name Here</string>
+    <string name="ForgotPasswordEnterNo">
+        Provide your acount\'s phone number for which \nyou want  to reset your password!
+    </string>
+
+    <string name="main_title">What Book \n are you looking for?</string>
+
+    <string name="ContactWhatsApp">WhatsApp</string>
+    <string name="ContactGmail">Send Mail</string>
+    <string name="ContactPhone">Call Seller</string>
+
+
+    <string name="pinVerifyError">The sms verification code used to create the phone auth credential is invalid. Please resend the verification code sms and be sure use the verification code provided by the user.</string>
+    <string name="addBookImage">Add Your Books Image Here</string>
+</resources>

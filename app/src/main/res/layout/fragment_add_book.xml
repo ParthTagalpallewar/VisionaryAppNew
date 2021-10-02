@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addBook_layoutRelative_base"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.addBooks.AddBookFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/addBook_card_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:cardElevation="10.05dp">
+
+        <RelativeLayout
+            android:id="@+id/addBook_layoutRelative_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/addBook_tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/circularstd"
+                android:text="Add Book To Sell"
+                android:textColor="@color/text"
+                android:textSize="22dp" />
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/addBook_card_full"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/addBook_card_toolbar"
+        app:cardElevation="10dp">
+
+        <ScrollView
+            android:id="@+id/addBook_view_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:id="@+id/addBook_layoutLinear_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <!--Image View-->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/addBook_card_addImg"
+                        android:layout_width="152dp"
+                        android:layout_height="152dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="5dp">
+
+                        <RelativeLayout
+                            android:id="@+id/addBookImageViewLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="1dp"
+                            android:background="#FFFFFF">
+
+                            <ImageView
+                                android:id="@+id/bookImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:contentDescription="@string/addBookImage" />
+
+                            <ImageView
+                                android:id="@+id/addBook_imageview_icon"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/pics"
+                                android:clickable="false"
+                                android:contentDescription="@string/addBookImage" />
+
+                            <TextView
+                                android:id="@+id/addBook_tv_ImgAdd"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/addBook_imageview_icon"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="15dp"
+                                android:clickable="false"
+                                android:hint="Add Image"
+                                android:text="Add Image"
+                                android:textColor="@color/text3"
+                                android:textSize="18sp" />
+
+                        </RelativeLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <LinearLayout
+                        android:id="@+id/home_location_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/addBook_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:fontFamily="@font/circularstd"
+                            android:text="Location - "
+                            android:textSize="20dp" />
+
+
+                        <RelativeLayout
+                            android:id="@+id/userLocationRelative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp">
+
+                            <ImageView
+                                android:id="@+id/home_image"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="10dp"
+                                android:src="@drawable/live_location_red" />
+
+                            <TextView
+                                android:id="@+id/location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="9dp"
+                                android:layout_toEndOf="@id/home_image"
+                                android:text="hello workd"
+                                android:textColor="@color/text"
+                                android:textSize="18sp" />
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_toEndOf="@id/location"
+                                android:padding="2dp"
+                                android:src="@drawable/ic_down_arrow_black" />
+
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+
+                    <!--Book Name-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="@color/color_primary"
+                        android:theme="@style/TextLabel"
+                        app:boxBackgroundColor="@color/color_primary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/bookName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/color_primary"
+                            android:hint="Book Name"
+                            android:textColor="@color/text"
+                            android:textColorHint="#7A8089" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--Book Description-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/TextLabel">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/bookDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/color_primary"
+                            android:hint="Book Description"
+                            android:inputType="textMultiLine"
+                            android:textColor="@color/text"
+
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <!--Book Description-->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:theme="@style/TextLabel">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/bookSellingPrize"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/color_primary"
+                                android:hint="Book Selling "
+                                android:inputType="phone"
+                                android:textColor="@color/text"
+                                android:textColorHint="#7A8089" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!--Book Description-->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:theme="@style/TextLabel">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/bookOriginalPrize"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/color_primary"
+                                android:hint="Book Original"
+                                android:inputType="phone"
+                                android:textColor="@color/text"
+                                android:textColorHint="#7A8089" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+
+                    <!--book Category-->
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="10dp">
+
+
+                        <com.jaredrummler.materialspinner.MaterialSpinner
+                            android:id="@+id/bookCategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="Choose Catagory"
+                            android:textSize="18dp"
+                            app:ms_text_color="@color/black" />
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="10dp"
+                        app:cardCornerRadius="10dp">
+
+                        <Button
+                            android:id="@+id/addBookBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#EC7C80"
+                            android:padding="10dp"
+                            android:text="Add Book"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+
+                            />
+                        <!---->
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/addBook_progress_bar"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:theme="@style/progressColor"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

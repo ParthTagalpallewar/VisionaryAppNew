@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomSheetContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_background"
+    android:padding="10dp"
+    >
+
+    <!--name-->
+    <TextView
+        android:id="@+id/bookName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:singleLine="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Karma Yoga"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        />
+
+    <ImageView
+        android:id="@+id/deleteBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_delete" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/prizesCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="8dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:layout_below="@+id/deleteBtn"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/sellingPrizeLinearLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Selling Price"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/sellingPrize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="₹100"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/originalPrizeLinearLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Original Price "
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/OriginalPrize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    tools:text="Data Not Available" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!--Location-->
+    <LinearLayout
+        android:id="@+id/locationLinear"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/prizesCardView"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/live_location_red" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:layout_below="@+id/itemHomeBook_TV_distance"
+            android:layout_marginLeft="5dp"
+            android:hint="location"
+            android:textColor="@color/text"
+            android:textSize="16dp">
+
+        </TextView>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/locationLinear"
+        android:layout_marginTop="15dp"
+        android:gravity="left"
+        android:textColor="@color/text3"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:text="this is book description this is book description this is book description this is book descriptionthis is book descriptionthis is book descriptionthis is book descriptionthis is book descriptionthis is book descriptionthis is book description"
+        android:textSize="16dp" />
+
+
+</RelativeLayout>

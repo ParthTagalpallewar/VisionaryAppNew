@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_contact_whatsapp"
+        android:icon="@drawable/whatsapp"
+        android:iconTint="@color/white"
+        android:title="WhatsApp" />
+    <item
+        android:id="@+id/menu_contact_phone"
+        android:icon="@drawable/ic_phone"
+        android:iconTint="@color/white"
+        android:title="Call Seller" />
+
+    <item
+        android:id="@+id/menu_contact_gmail"
+        android:icon="@drawable/gmail"
+        android:iconTint="@color/white"
+        android:title="Send Mail" />
+
+</menu>

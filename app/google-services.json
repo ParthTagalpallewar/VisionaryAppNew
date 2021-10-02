@@ -1,0 +1,121 @@
+{
+  "project_info": {
+    "project_number": "607239346072",
+    "project_id": "booksellingapp-bbe71",
+    "storage_bucket": "booksellingapp-bbe71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607239346072:android:9d86f66e700a02475cfded",
+        "android_client_info": {
+          "package_name": "com.example.booksellingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "607239346072-9m4su6ct8du9378mpfpafbplskdmnfna.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.booksellingapp",
+            "certificate_hash": "25e7f3649202bf3b771d817bbf23ee51c4741c33"
+          }
+        },
+        {
+          "client_id": "607239346072-ls5jk16je2ra0l2eb2blalt25sj3cnof.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.booksellingapp",
+            "certificate_hash": "823c792c238b10e6500ea56116f3ecff4a025776"
+          }
+        },
+        {
+          "client_id": "607239346072-iadm7sjje592f2ohgp299l8ld3kbcs6i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMeLItA_SyeBzH4NtQ0BjKqJYIqcxo9p0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607239346072-iadm7sjje592f2ohgp299l8ld3kbcs6i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607239346072:android:8952d9d9b61e50d55cfded",
+        "android_client_info": {
+          "package_name": "com.example.firebasephoneauth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "607239346072-iadm7sjje592f2ohgp299l8ld3kbcs6i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMeLItA_SyeBzH4NtQ0BjKqJYIqcxo9p0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607239346072-iadm7sjje592f2ohgp299l8ld3kbcs6i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607239346072:android:fa0d010df67caac75cfded",
+        "android_client_info": {
+          "package_name": "com.reselling.visionary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "607239346072-8d0s7np0q5r0ssmbcqspt7ud8thhjhvh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reselling.visionary",
+            "certificate_hash": "25e7f3649202bf3b771d817bbf23ee51c4741c33"
+          }
+        },
+        {
+          "client_id": "607239346072-iadm7sjje592f2ohgp299l8ld3kbcs6i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMeLItA_SyeBzH4NtQ0BjKqJYIqcxo9p0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607239346072-iadm7sjje592f2ohgp299l8ld3kbcs6i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

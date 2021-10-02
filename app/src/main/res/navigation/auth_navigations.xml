@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_navigations"
+    app:startDestination="@id/loginFragment">
+
+    <!--Login-->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.reselling.visionary.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordManualFragment"
+            app:destination="@id/forgotPasswordManualFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/forgotPasswordManualFragment" />
+        <!--            -->
+        <!--            app:popUpToInclusive="true"-->
+
+
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_loginFragment_to_gpsFragment"
+            app:destination="@id/gpsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_loginFragment_to_baseHomeFragment2"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!--SignUp Fragment-->
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.reselling.visionary.ui.signup.SignUpFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup">
+        <action
+            android:id="@+id/action_signUpFragment_to_verifyCodeFragment"
+            app:destination="@id/verifyCodeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_signUpFragment_to_gpsFragment"
+            app:destination="@id/gpsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+    <!--Verify COde-->
+    <fragment
+        android:id="@+id/verifyCodeFragment"
+        android:name="com.reselling.visionary.ui.verifyCode.VerifyCodeFragment"
+        android:label="fragment_code_verification"
+        tools:layout="@layout/fragment_code_verification">
+
+        <action
+            android:id="@+id/action_verifyCodeFragment_to_gpsFragment"
+            app:destination="@id/gpsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/verifyCodeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!--Forgot Password-->
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.reselling.visionary.ui.forgotPassword.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password">
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_forgotPasswordVerifyCode"
+            app:destination="@id/forgotPasswordVerifyCode"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_updatePasswordFragment"
+            app:destination="@id/updatePasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!--Verify Code-->
+    <fragment
+        android:id="@+id/forgotPasswordVerifyCode"
+        android:name="com.reselling.visionary.ui.forgotPassword.ForgotPasswordVerifyCode"
+        android:label="fragment_forgot_password_code_verification"
+        tools:layout="@layout/fragment_forgot_password_code_verification">
+        <action
+            android:id="@+id/action_forgotPasswordVerifyCode_to_updatePasswordFragment"
+            app:destination="@id/updatePasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!--Update Code-->
+    <fragment
+        android:id="@+id/updatePasswordFragment"
+        android:name="com.reselling.visionary.ui.forgotPassword.updatePassword.UpdatePasswordFragment"
+        android:label="fragment_update_password"
+        tools:layout="@layout/fragment_update_password">
+        <action
+            android:id="@+id/action_updatePasswordFragment_to_successfulUpdatePasswordFragment"
+            app:destination="@id/successfulUpdatePasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_updatePasswordFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!--Update Password Success-->
+    <fragment
+        android:id="@+id/successfulUpdatePasswordFragment"
+        android:name="com.reselling.visionary.ui.forgotPassword.updatePassword.SuccessfulUpdatePasswordFragment"
+        android:label="fragment_update_password_successful"
+        tools:layout="@layout/fragment_update_password_successful">
+        <action
+            android:id="@+id/action_successfulUpdatePasswordFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <!--Auth All Fragments End-->
+
+    <fragment
+        android:id="@+id/forgotPasswordManualFragment"
+        android:name="com.reselling.visionary.ui.forgotPasswordManual.ForgotPasswordManualFragment"
+        android:label="fragment_forgot_password_manual"
+        tools:layout="@layout/fragment_forgot_password_manual">
+        <action
+            android:id="@+id/action_categoryBooks_to_updatePasswordFrgment"
+            app:destination="@id/updatePasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/forgotPasswordManualFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

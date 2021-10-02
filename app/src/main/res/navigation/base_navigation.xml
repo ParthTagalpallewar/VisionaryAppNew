@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/base_navigation"
+    app:startDestination="@id/homeFragment">
+
+
+    <!--Bottom Navigation Start-->
+
+
+    <!--Home Base Fragment-->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.reselling.visionary.ui.home.baseHomeFragment.BaseHomeFragment"
+        android:label="@string/title_home"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        tools:layout="@layout/fragment_base_home">
+
+        <action
+            android:id="@+id/action_homeFragment_to_homeAllBooksFragment"
+            app:destination="@id/homeAllBooksFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_gpsFragment"
+            app:destination="@id/gpsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_homeBookDetails"
+            app:destination="@id/homeBookDetails"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_allCategoriesFragment"
+            app:destination="@id/allCategoriesFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoryBooks"
+            app:destination="@id/categoryBooks"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!--Profile-->
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.reselling.visionary.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        tools:layout="@layout/fragment_profile">
+
+    </fragment>
+
+    <!--Add New Book-->
+    <fragment
+        android:id="@+id/navigation_add"
+        android:name="com.reselling.visionary.ui.addBooks.AddBookFragment"
+        android:label="@string/title_add"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        tools:layout="@layout/fragment_add_book">
+        <action
+            android:id="@+id/action_navigation_add_to_gpsFragment"
+            app:destination="@id/gpsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+         <action
+             android:id="@+id/action_navigation_add_to_usersBooks"
+             app:destination="@id/usersBooks"
+             app:enterAnim="@anim/slide_in_right"
+             app:exitAnim="@anim/slide_out_left"
+             app:popEnterAnim="@anim/slide_in_left"
+             app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!--Users Books-->
+    <fragment
+        android:id="@+id/usersBooks"
+        android:name="com.reselling.visionary.ui.userAddedBooks.UsersBooks"
+        android:label="@string/title_books"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        tools:layout="@layout/fragment_user_added_books" />
+
+    <!--Bottom Navigation End -->
+
+
+    <!--Location ALL Fragments Start-->
+    <!--Gps Fragment-->
+    <fragment
+        android:id="@+id/gpsFragment"
+        android:name="com.reselling.visionary.ui.gpsLocation.GpsFragment"
+        android:label="fragment_location_gps"
+        tools:layout="@layout/fragment_location_gps">
+        <action
+            android:id="@+id/action_gpsFragment_to_manualLocation"
+            app:destination="@id/manualLocation"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/gpsFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_gpsFragment_to_baseHomeFragment2"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/gpsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <!--Manual Location-->
+    <fragment
+        android:id="@+id/manualLocation"
+        android:name="com.reselling.visionary.ui.manualLocation.ManualLocation"
+        android:label="fragment_location_pincode"
+        tools:layout="@layout/fragment_location_pincode">
+
+        <action
+            android:id="@+id/action_manualLocation_to_baseHomeFragment2"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/manualLocation"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <!--Location ALL Fragments End-->
+
+
+    <!--Auth All Fragments End-->
+
+
+
+
+    <!--Home All Fragment Start-->
+
+    <!--All Categories-->
+    <fragment
+        android:id="@+id/allCategoriesFragment"
+        android:name="com.reselling.visionary.ui.homeCategory.AllCategoriesFragment"
+        android:label="fragment_books_category"
+        tools:layout="@layout/fragment_books_category">
+        <action
+            android:id="@+id/action_allCategoriesFragment_to_categoryBooks"
+            app:destination="@id/categoryBooks"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <!--HomeAllBooks-->
+    <fragment
+        android:id="@+id/homeAllBooksFragment"
+        android:name="com.reselling.visionary.ui.home.homeAllBooks.HomeAllBooksFragment"
+        android:label="fragment_home_all_books"
+        tools:layout="@layout/fragment_home_all_books">
+        <action
+            android:id="@+id/action_homeAllBooksFragment_to_homeBookDetails"
+            app:destination="@id/homeBookDetails"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <!--Home Details-->
+    <fragment
+        android:id="@+id/homeBookDetails"
+        android:name="com.reselling.visionary.ui.home.homeBookDetails.HomeDetailsBase"
+        android:label="fragment_home_book_details"
+        tools:layout="@layout/fragment_home_details_base">
+        <argument
+            android:name="details_books_information"
+            app:argType="com.reselling.visionary.data.models.books.Books"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <!--Home Book Details-->
+    <fragment
+        android:id="@+id/homeBookDetails2"
+        android:name="com.reselling.visionary.ui.home.homeBookDetails.bookDetails.HomeBookDetails"
+        android:label="fragment_home_book_details"
+        tools:layout="@layout/fragment_home_book_details" />
+    <!--Home Seller Detaisls-->
+    <fragment
+        android:id="@+id/homeSellerDetails"
+        android:name="com.reselling.visionary.ui.home.homeBookDetails.sellerDetails.HomeSellerDetails"
+        android:label="fragment_home_seller_details"
+        tools:layout="@layout/fragment_home_seller_details">
+        <action
+            android:id="@+id/action_homeSellerDetails_to_homeBookDetails"
+            app:destination="@id/homeBookDetails"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeSellerDetails_to_mapsFragment"
+            app:destination="@id/mapsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <!--Maps-->
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.reselling.visionary.ui.home.homeBookDetails.sellerDetails.MapsFragment"
+        android:label="fragment_seller_details_maps"
+        tools:layout="@layout/fragment_seller_details_maps" />
+    <!--Category Books-->
+    <fragment
+        android:id="@+id/categoryBooks"
+        android:name="com.reselling.visionary.ui.homeCategory.categoryBooks.CategoryBooks"
+        android:label="fragment_home_category_books"
+        tools:layout="@layout/fragment_home_category_books">
+        <action
+            android:id="@+id/action_categoryBooks_to_homeBookDetails"
+            app:destination="@id/homeBookDetails"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="selected_category"
+            app:argType="string" />
+    </fragment>
+
+
+    <!--Home All Fragments End -->
+
+</navigation>

@@ -1,0 +1,161 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id "androidx.navigation.safeargs"
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+
+}
+
+android {
+    compileSdkVersion 31
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.reselling.visionary"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 3
+        versionName "3.0"
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.1'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation 'com.android.support:multidex:1.0.3'
+
+
+    implementation 'com.google.firebase:firebase-analytics:19.0.1'
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+    implementation "androidx.browser:browser:1.3.0"
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:26.8.0')
+
+    //Coroutines Android
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
+
+    //Retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // Room
+    implementation "androidx.room:room-runtime:2.3.0"
+    kapt "androidx.room:room-compiler:2.3.0"
+    implementation "androidx.room:room-ktx:2.3.0"
+
+    //Fused Location
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+    //LifeCycleExtension
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+
+    //Material Design
+    implementation 'com.google.android.material:material:1.5.0-alpha03'
+
+    //Navigation Component
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
+
+    //Logging Interceptor
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
+
+    //DataStore Preferences
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha02"
+    //LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+
+
+    //ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+    implementation "android.arch.lifecycle:common-java8:1.1.1"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:4.12.0"
+
+    // Paging 3
+    implementation "androidx.paging:paging-runtime-ktx:3.0.1"
+
+    //Dagger hilt
+    implementation "com.google.dagger:hilt-android:2.33-beta"
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+    kapt 'com.google.dagger:hilt-android-compiler:2.33-beta'
+
+
+    //Fragment And Activity Ktx
+    implementation "androidx.activity:activity-ktx:1.4.0-alpha01"
+    implementation "androidx.fragment:fragment-ktx:1.3.6"
+
+    //Paging3
+    implementation "androidx.paging:paging-runtime-ktx:3.1.0-alpha03"
+
+    //ViewBinding
+    implementation 'com.github.yogacp:android-viewbinding:1.0.2'
+
+    //Maps
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
+
+
+    //Third Party Libraries
+
+    //Fab
+    implementation("com.leinardi.android:speed-dial:3.1.1")
+
+    //Country picker
+    implementation 'com.hbb20:ccp:2.5.1'
+
+    //SnackBar
+    implementation 'com.github.Pradyuman7:ChocoBar:V1.0'
+
+    //Lottie Animations
+    implementation "com.airbnb.android:lottie:3.4.4"
+
+    //ImageCropping
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+
+    //Material Spinner
+    implementation 'com.jaredrummler:material-spinner:1.3.1'
+
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.5.30"
+}
+
+kapt {
+    correctErrorTypes true
+}

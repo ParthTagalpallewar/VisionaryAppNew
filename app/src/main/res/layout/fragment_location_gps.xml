@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.gpsLocation.GpsFragment">
+
+
+    <ImageView
+        android:id="@+id/addLocationImage"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gps_location" />
+
+    <TextView
+        android:id="@+id/addLocationTextOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addLocationImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Where do you want \nto buy/sell Books?"
+        android:textColor="@color/black"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/addLocationTextTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addLocationTextOne"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="   To enjoy all that Visionary has to offer you,\n we need to know where to look for them."
+        android:textColor="@color/text3"
+        android:textSize="15dp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addLocationTextTwo"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="6dp">
+
+        <Button
+            android:id="@+id/btn_aroundMe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_primary"
+            android:text="Around Me"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/setLocationManually"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardBtn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="30dp"
+            android:paddingRight="30dp"
+            android:text="Set Location Manuallly"
+            android:textColor="@color/text1"
+            android:textSize="20dp" />
+
+        <View
+            android:layout_below="@+id/setLocationManually"
+            android:layout_width="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="1dp"
+            android:layout_marginTop="1dp"
+            android:background="#B6AEAE"
+            android:paddingBottom="30dp" />
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:visibility="gone"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animationView"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:elevation="10dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loc_anim" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:text="Please Wait \n It take Some Time to \nFind Your location"
+                android:textColor="@color/text"
+                android:textSize="30dp" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:theme="@style/progressColor"
+        android:visibility="invisible" />
+
+
+</RelativeLayout>
