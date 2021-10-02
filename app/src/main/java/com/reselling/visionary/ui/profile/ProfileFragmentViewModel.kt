@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.reselling.visionary.data.models.userModel.User
 import com.reselling.visionary.data.preferences.PreferencesManager
 import com.reselling.visionary.data.repository.AuthRepository
-import com.reselling.visionary.ui.splash.NewSplashViewModel
 import com.reselling.visionary.utils.UserLogOutId
 import com.reselling.visionary.utils.UserNoLocation
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,19 +1,12 @@
 package com.reselling.visionary.ui.home.baseHomeFragment
 
-import android.util.Log
 import androidx.lifecycle.*
-import com.reselling.visionary.data.models.dataModels.Constants
 import com.reselling.visionary.data.models.userModel.User
-import com.reselling.visionary.data.network.networkResponseType.Resource
 import com.reselling.visionary.data.preferences.PreferencesManager
-import com.reselling.visionary.data.preferences.UserInfo
 import com.reselling.visionary.data.repository.AuthRepository
 import com.reselling.visionary.data.repository.books.BooksRepository
-import com.reselling.visionary.ui.splash.NewSplashViewModel
-import com.reselling.visionary.utils.saveConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 private const val TAG = "HomeViewModel"

@@ -1,8 +1,7 @@
 package com.reselling.visionary.ui.splash
 
-import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -20,55 +19,42 @@ private const val TAG = "SplashScreen"
 @AndroidEntryPoint
 class SplashScreen : AppCompatActivity() {
 
-    private val viewModel: NewSplashViewModel by viewModels()
+    /*Initializing view model using property delegate*/
+    private val viewModel: SplashViewModel by viewModels()
     lateinit var binding: FragmentSplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = FragmentSplashBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        this.changeStatusBarColor(R.color.white)
 
 
+        binding.apply {
+            setContentView(root) // setting content view
+            changeStatusBarColor(R.color.white ) //changing status bar color to white
+            animationView.setUpAnimation() // starting animation of splash screen
+        }
 
-        binding.animationView.setUpAnimation()
 
         lifecycleScope.launchWhenStarted {
-            viewModel.tasksEvent.collect { event ->
+            //collecting all events from viewModel
+            viewModel.splashEventsFlow.collect { event ->
 
-
-                binding.animationView.isVisible = event is NewSplashViewModel.SplashEvents.Loading
+                // if event is loading then only show animation on splash screen
+                binding.animationView.isVisible = event is SplashEvents.LoadingEvent
 
                 when (event) {
-                    is NewSplashViewModel.SplashEvents.NavigateToLoginScreen -> {
+                    is SplashEvents.NavigateToLoginScreen -> {
                         this@SplashScreen.move(AuthActivity::class.java)
-
                     }
-                    is NewSplashViewModel.SplashEvents.NavigateToHomeScreen -> {
+                    is SplashEvents.NavigateToHomeScreen -> {
                         this@SplashScreen.move(MainActivity::class.java)
                     }
 
-                    is NewSplashViewModel.SplashEvents.InternetProblem -> {
-                        binding.root.snackBar(internetExceptionString, "Turn On") { snackBar ->
-                            try {
-                                startActivity(Intent(Settings.ACTION_DATA_ROAMING_SETTINGS))
-                                snackBar.build().dismiss()
-                            } catch (e: Exception) {
-                            }
-
-                        }
+                    is SplashEvents.LoadingEvent -> {
+                        // this will call with there is loading event
+                        Log.e(TAG, "onCreate: Loading in Splash Screen")
                     }
-
-
-                    is NewSplashViewModel.SplashEvents.ShowInvalidInputMessage -> {
-                        binding.root.snackBar(event.msg, "Ok") { snackBar ->
-                            snackBar.build().dismiss()
-                        }
-
-                    }
-
-
                 }
             }
         }

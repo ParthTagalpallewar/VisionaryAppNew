@@ -1,10 +1,10 @@
 package com.reselling.visionary.data.preferences
 
 import android.content.Context
-import android.util.Log
 import androidx.datastore.DataStore
 import androidx.datastore.preferences.*
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
@@ -19,7 +19,7 @@ data class UserInfo(val id: String, val location: String)
 class PreferencesManager @Inject constructor(@ApplicationContext private val context: Context) {
 
 
-    private val dataStore: DataStore<Preferences> =  context.createDataStore(name = "user")
+    private val dataStore: DataStore<Preferences> = context.createDataStore(name = "user")
 
 
     val preferenceFlow = dataStore.data
@@ -32,24 +32,26 @@ class PreferencesManager @Inject constructor(@ApplicationContext private val con
             }
         }
         .map { preferences ->
-            val id =  preferences[PreferencesKeys.USER_ID] ?: "-1"
+            val id = preferences[PreferencesKeys.USER_ID] ?: "-1"
             val loc = preferences[PreferencesKeys.USER_Loc] ?: "0"
 
-            UserInfo(id,loc)
+            UserInfo(id, loc)
         }
+
 
     suspend fun updateUserId(id: String) {
         dataStore.edit { preferences ->
             preferences[PreferencesKeys.USER_ID] = id
         }
     }
+
     suspend fun updateUserLoc(loc: String) {
         dataStore.edit { preferences ->
             preferences[PreferencesKeys.USER_Loc] = loc
         }
     }
 
-    suspend fun updateUserIdAndLocation(id:String,location: String){
+    suspend fun updateUserIdAndLocation(id: String, location: String) {
         dataStore.edit { preferences ->
             preferences[PreferencesKeys.USER_ID] = id
             preferences[PreferencesKeys.USER_Loc] = location
@@ -73,7 +75,7 @@ class PreferencesManager @Inject constructor(@ApplicationContext private val con
             }
         }
         .map { preferences ->
-              preferences[PreferencesKeys.USER_PHONE]
+            preferences[PreferencesKeys.USER_PHONE]
         }
 
 

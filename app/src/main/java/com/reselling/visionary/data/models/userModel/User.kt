@@ -6,7 +6,10 @@ import androidx.room.PrimaryKey
 import com.reselling.visionary.utils.UserNoLocation
 import kotlinx.android.parcel.Parcelize
 
-val AutoGenerateUserId: Int = 0
+
+const val UserDefaultDatabaseId: Int = 0
+
+
 
 @Entity(tableName = "user-table")
 @Parcelize
@@ -24,7 +27,5 @@ data class User(
         val district: String = "",
 
         @PrimaryKey(autoGenerate = false)
-        val Uid: Int = AutoGenerateUserId
-): Parcelable{
-
-}
+        val Uid: Int = UserDefaultDatabaseId
+): Parcelable

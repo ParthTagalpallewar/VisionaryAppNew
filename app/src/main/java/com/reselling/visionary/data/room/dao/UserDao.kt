@@ -1,7 +1,7 @@
 package com.reselling.visionary.data.room.dao
 
 import androidx.room.*
-import com.reselling.visionary.data.models.userModel.AutoGenerateUserId
+import com.reselling.visionary.data.models.userModel.UserDefaultDatabaseId
 import com.reselling.visionary.data.models.userModel.User
 import kotlinx.coroutines.flow.Flow
 
@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.Flow
 interface UserDao {
 
     @Query("Select * FROM `USER-TABLE` WHERE Uid = :id")
-    fun getUserFromRoom(id: Int = AutoGenerateUserId): User
+    fun getUserFromRoom(id: Int = UserDefaultDatabaseId): User
 
     @Query("Select * FROM `USER-TABLE` WHERE Uid = :id")
-    fun getUserFromRoomFLow(id: Int = AutoGenerateUserId): Flow<User>
+    fun getUserFromRoomFLow(id: Int = UserDefaultDatabaseId): Flow<User>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUser(user: User):Long
@@ -22,5 +22,5 @@ interface UserDao {
 
 
     @Query("DELETE  FROM `user-table` Where Uid = :id")
-    fun logOut(id: Int = AutoGenerateUserId)
+    fun logOut(id: Int = UserDefaultDatabaseId)
 }
