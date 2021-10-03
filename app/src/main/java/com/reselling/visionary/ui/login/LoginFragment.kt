@@ -1,13 +1,10 @@
 package com.reselling.visionary.ui.login
 
-import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
 import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import com.reselling.visionary.R
 import com.reselling.visionary.databinding.FragmentLoginBinding
 import com.reselling.visionary.ui.MainActivity
-import com.reselling.visionary.utils.internetExceptionString
 import com.reselling.visionary.utils.move
 import com.reselling.visionary.utils.snackBar
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,115 +29,62 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        try {
-            val currentDestination = findNavController().currentDestination?.id
+        binding.apply {
 
-            binding.apply {
-
-
-                edPassword.addTextChangedListener {
-                    viewModel.password = it.toString()
-                }
-
-                edPassword.setText(viewModel.password)
-                edMobile.setText(viewModel.phoneNumber)
-                ccpCountryCode.setDefaultCountryUsingNameCode(viewModel.countryCode)
+            ccpCountryCode.setDefaultCountryUsingNameCode("IN")
 
 
-                txtForgot.setOnClickListener {
-                    viewModel.forgotPasswordButttonClicked()
-                }
-
-                //saving mob no in viewModel
-                edMobile.addTextChangedListener {
-                    viewModel.phoneNumber = it.toString()
-                }
-
-                ccpCountryCode.setOnCountryChangeListener {
-                    viewModel.countryCode = ccpCountryCode.selectedCountryCode
-                }
-
-                //sign Btn click kele ki method call hoil
-                btnSingin.setOnClickListener {
-                    viewModel.signInBtnClicked()
-                }
-
-                btnSignup.setOnClickListener {
-                    viewModel.signUpTextViewClick()
-                }
-
-
+            //sign Btn click kele ki method call hoil
+            btnSingin.setOnClickListener {
+                viewModel.signInBtnClicked(
+                    phoneNumber = edMobile.text.toString(),
+                    countryCode = ccpCountryCode.selectedCountryCode,
+                    password = edPassword.text.toString()
+                )
             }
 
-            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-                viewModel.loginEvent.collect {
-                    binding.progressBar.isVisible =
-                        it is LoginViewModel.LoginFragmentEvent.LoadingEvent
+            /*Move to SignUp Screen of Click of SingUp Button*/
+            btnSignup.setOnClickListener {
+                LoginFragmentDirections.actionLoginFragmentToSignUpFragment().apply {
+                    findNavController().navigate(this)
+                }
+            }
 
-                    when (it) {
+            txtForgot.setOnClickListener {
+                /* LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment().apply {
+                     findNavController().navigate(this)
+                 }*/
 
-                        is LoginViewModel.LoginFragmentEvent.ShowInvalidInputMessage -> {
-
-                            requireView().snackBar(it.msg)
-                        }
-
-                        is LoginViewModel.LoginFragmentEvent.NavigateToMainFragment -> {
-
-                            requireActivity().move(MainActivity::class.java)
-
-
-                        }
+                LoginFragmentDirections.actionLoginFragmentToForgotPasswordManualFragment().apply {
+                    findNavController().navigate(this)
+                }
+            }
 
 
-                        is LoginViewModel.LoginFragmentEvent.NavigateToForgetPasswordFragment -> {
-                            if (currentDestination == R.id.loginFragment) {
-                                LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()
-                                    .apply {
-                                        findNavController().navigate(this)
-                                    }
-                            }
-                        }
+        }
 
-                        is LoginViewModel.LoginFragmentEvent.NavigateToSignUpFragment -> {
-                            if (currentDestination == R.id.loginFragment) {
-                                LoginFragmentDirections.actionLoginFragmentToSignUpFragment()
-                                    .apply {
-                                        findNavController().navigate(this)
-                                    }
-                            }
-                        }
-                        is LoginViewModel.LoginFragmentEvent.NavigateToForgetPasswordManualFragment -> {
-                            if (currentDestination == R.id.loginFragment) {
-                                LoginFragmentDirections.actionLoginFragmentToForgotPasswordManualFragment()
-                                    .apply {
-                                        findNavController().navigate(this)
-                                    }
-                            }
-                        }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.loginEvent.collect { event ->
 
-                        is LoginViewModel.LoginFragmentEvent.InternetProblem -> {
-                            requireView().snackBar(internetExceptionString, "Turn On") { snackBar ->
-                                try {
-                                    startActivity(Intent(Settings.ACTION_DATA_ROAMING_SETTINGS))
-                                    snackBar.build().dismiss()
-                                } catch (e: Exception) {
-                                }
+                binding.progressBar.isVisible =
+                    event is LoginViewModel.LoginFragmentEvent.LoadingEvent
 
-                            }
-                        }
+                when (event) {
 
-                        is LoginViewModel.LoginFragmentEvent.ObserveLoginResponse -> {
-                            viewModel.handelLoginResponse(it.response)
-                        }
+                    is LoginViewModel.LoginFragmentEvent.ShowInvalidInputMessage -> {
+                        requireView().snackBar(event.msg)
+                    }
 
+                    is LoginViewModel.LoginFragmentEvent.NavigateToMainFragment -> {
+                        requireActivity().move(MainActivity::class.java)
+                    }
 
+                    else -> {
+                        Log.e(TAG, "onViewCreated: Else of Login Fragment is Called")
                     }
                 }
             }
-        } catch (e: Exception) {
-            Log.e(TAG, "onViewCreated: ${e.message}")
         }
-
 
     }
 

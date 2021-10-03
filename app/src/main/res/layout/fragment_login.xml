@@ -49,10 +49,10 @@
                 <com.hbb20.CountryCodePicker
                     android:id="@+id/ccp_countryCode"
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@color/white"
                     android:elevation="5dp"
                     app:ccpDialog_backgroundColor="@color/white" />
