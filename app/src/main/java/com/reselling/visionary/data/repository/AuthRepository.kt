@@ -1,22 +1,15 @@
 package com.reselling.visionary.data.repository
 
-import com.reselling.visionary.data.models.dataModels.ConstantsResponse
 import com.reselling.visionary.data.network.apis.AuthApi
 import com.reselling.visionary.data.network.apis.DataApi
 import com.reselling.visionary.data.network.networkResponseType.MySafeApiRequest
-import com.reselling.visionary.data.models.userModel.SignUpModel
 import com.reselling.visionary.data.models.userModel.User
 import com.reselling.visionary.data.models.userModel.UserResponseModel
 import com.reselling.visionary.data.network.apis.UserOperationsApi
 import com.reselling.visionary.data.network.networkResponseType.Resource
-import com.reselling.visionary.data.preferences.PreferencesManager
 import com.reselling.visionary.data.room.dao.UserDao
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 import javax.inject.Inject
@@ -36,12 +29,12 @@ class AuthRepository @Inject constructor(
     //In dataBase
     suspend fun updateUser(user: User) = withContext(Dispatchers.IO) { userDao.updateUser(user) }
 
-    suspend fun signUp(signUpModel: SignUpModel) = apiRequest {
+    suspend fun signUp(name:String, email:String, phone:String, password: String) = apiRequest {
         authApi.userSignUp(
-                phone = signUpModel.phone,
-                password = signUpModel.password,
-                name = signUpModel.name,
-                email = signUpModel.email
+                phone = phone,
+                password = password,
+                name = name,
+                email = email
         )
     }
 

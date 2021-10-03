@@ -1,10 +1,8 @@
 package com.reselling.visionary.ui.auth
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.reselling.visionary.R
+import androidx.appcompat.app.AppCompatActivity
 import com.reselling.visionary.databinding.ActivityAuthBinding
-import com.reselling.visionary.utils.changeStatusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,181 +1,118 @@
 package com.reselling.visionary.ui.signup
 
-import android.annotation.SuppressLint
-import androidx.lifecycle.SavedStateHandle
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.reselling.visionary.data.models.userModel.SignUpModel
-import com.reselling.visionary.data.models.userModel.UserResponseModel
 import com.reselling.visionary.data.network.networkResponseType.Resource
-import com.reselling.visionary.data.preferences.PreferencesManager
 import com.reselling.visionary.data.repository.AuthRepository
-import com.reselling.visionary.utils.Constants
-import com.reselling.visionary.utils.UserNoLocation
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 private const val TAG = "SignUpViewModel"
-
-@SuppressLint("StaticFieldLeak")
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-    private val preferencesManager: PreferencesManager,
 ) : ViewModel() {
-
-
-    var name =  ""
-        set(value) {
-            field = value
-        }
-
-    var phoneNumber =  ""
-        set(value) {
-            field = value
-        }
-
-    var password =  ""
-        set(value) {
-            field = value
-        }
-
-    var countryCode = "+91"
-        set(value) {
-            field = value
-        }
-
-    var email =  ""
-        set(value) {
-            field = value
-        }
-
-
-    //called form fragment
-    fun signUpBtnClicked() {
-        viewModelScope.launch {
-
-            _signUpTaskEventChannel.send(SignUpFragmentEvents.LoadingEvent)
-
-            when {
-                (name.isBlank()) -> {
-                    showInvalidInputMessage("Please Enter Your Name")
-                }
-                (phoneNumber.isBlank()) or (phoneNumber.length != 10) -> {
-                    showInvalidInputMessage("Please Enter valid Phone Number")
-                }
-                password.isBlank() -> {
-                    showInvalidInputMessage("Please Enter Password")
-                }
-                password.length < 7 -> {
-                    showInvalidInputMessage("Your password is Weak")
-                }
-                email.isBlank() -> {
-                    showInvalidInputMessage("Please Enter Password")
-                }
-                else -> {
-                    if (Constants.ENABLE_PHONE_VERIFICATION) {
-                        //todo add twilio service here
-
-                    } else {
-                        signUpUser()
-                    }
-                }
-
-            }
-        }
-
-    }
-
-
-    //send signUp req to network
-    private fun signUpUser() = viewModelScope.launch {
-        _signUpTaskEventChannel.send(SignUpFragmentEvents.LoadingEvent)
-
-        _signUpTaskEventChannel.send(
-            SignUpFragmentEvents.ObserveSignUpResponse(
-                authRepository.signUp(SignUpModel(name, countryCode + phoneNumber, email, password))
-            )
-        )
-
-    }
-
-
-    fun handelSignUpResponse(response: Resource<UserResponseModel>?) = viewModelScope.launch {
-        response.apply {
-            when (this) {
-                is Resource.NoInterException -> {
-                    viewModelScope.launch {
-                        _signUpTaskEventChannel.send(SignUpFragmentEvents.InternetProblem)
-                    }
-                }
-
-                is Resource.Failure -> {
-                    showInvalidInputMessage("Error : $errorBody")
-                }
-
-                is Resource.Success -> {
-                    withContext(Dispatchers.IO) {
-
-                        deleteALlValues()
-
-                        //adding data form response to dataStore
-                        preferencesManager.updateUserIdAndLocation(
-                            value.user.id,
-                            if (value.user.location == "NO") UserNoLocation else value.user.location
-                        ).also {
-
-                            //adding user to room
-                            authRepository.insertUser(value.user).also {
-
-                                //moving to location fragment
-                                _signUpTaskEventChannel.send(SignUpFragmentEvents.NavigateToHomeFragment)
-
-
-                            }
-                        }
-
-                    }
-
-
-                }
-
-            }
-        }
-    }
-
-    private fun deleteALlValues() {
-        phoneNumber = ""
-        password = ""
-        name = ""
-        email = ""
-    }
 
     private val _signUpTaskEventChannel = Channel<SignUpFragmentEvents>()
     val signUpEvent = _signUpTaskEventChannel.receiveAsFlow()
 
-    sealed class SignUpFragmentEvents {
-        data class ShowInvalidInputMessage(val msg: String) : SignUpFragmentEvents()
-        data class ObserveSignUpResponse(val response: Resource<UserResponseModel>) :
-            SignUpFragmentEvents()
+    // make signup call in auth repository
+    fun signUpBtnClicked(
+        name: String,
+        phoneNumber: String,
+        password: String,
+        countryCode: String,
+        email: String
+    ) = viewModelScope.launch {
+
+        _signUpTaskEventChannel.send(SignUpFragmentEvents.LoadingEvent)
+
+        val validationResult = validateUserData(name, phoneNumber, password, email)
+
+        if (validationResult) {
+            // sending signup request to serer
+            val response = authRepository.signUp(
+                phone = countryCode + phoneNumber,
+                password = password,
+                name = name,
+                email = email
+            )
+
+            when (response) {
+                is Resource.Failure -> {
+                    showInvalidInputMessage(response.errorBody)
+                }
+
+                is Resource.Success -> {
+
+                    //adding user to room
+                    authRepository.insertUser(response.value.user).also {
+
+                        //moving to Home fragment
+                        _signUpTaskEventChannel.send(SignUpFragmentEvents.NavigateToHomeFragment)
 
 
-        object InternetProblem : SignUpFragmentEvents()
+                    }
 
-        object LoadingEvent : SignUpFragmentEvents()
-        object NavigateToVerifyCodeFragment : SignUpFragmentEvents()
-        object NavigateToHomeFragment : SignUpFragmentEvents()
-        object HideResendBtn : SignUpFragmentEvents()
+
+                }
+
+                else -> {
+                    Log.e(TAG, "signUpBtnClicked: Else is Called after receiving Signup Response")
+                }
+            }
+        }
+
     }
 
 
+    /*If every field is correct then it will return true else false*/
+    private fun validateUserData(
+        name: String,
+        phoneNumber: String,
+        password: String,
+        email: String
+    ): Boolean {
+        when {
+            (name.isBlank()) -> {
+                showInvalidInputMessage("Please Enter Your Name")
+            }
+            (phoneNumber.isBlank()) or (phoneNumber.length != 10) -> {
+                showInvalidInputMessage("Please Enter valid Phone Number")
+            }
+            password.isBlank() -> {
+                showInvalidInputMessage("Please Enter Password")
+            }
+            password.length < 7 -> {
+                showInvalidInputMessage("Your password is Weak")
+            }
+            email.isBlank() -> {
+                showInvalidInputMessage("Please Enter Email")
+            }
+            else -> {
+
+                return true
+
+            }
+        }
+        return false
+    }
+
+
+    /*Sends the error message in fragment*/
     private fun showInvalidInputMessage(text: String) = viewModelScope.launch {
         _signUpTaskEventChannel.send(SignUpFragmentEvents.ShowInvalidInputMessage(text))
     }
 
+
+    sealed class SignUpFragmentEvents {
+        data class ShowInvalidInputMessage(val msg: String) : SignUpFragmentEvents()
+        object LoadingEvent : SignUpFragmentEvents()
+        object NavigateToHomeFragment : SignUpFragmentEvents()
+    }
 
 }

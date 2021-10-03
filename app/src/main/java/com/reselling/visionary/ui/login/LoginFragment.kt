@@ -29,10 +29,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private val viewModel: LoginViewModel by viewModels()
     private val binding: FragmentLoginBinding by viewBinding()
 
-    override fun onStart() {
-        super.onStart()
-        Log.e(TAG, "onStart: Welcome to LoginFragment ")
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

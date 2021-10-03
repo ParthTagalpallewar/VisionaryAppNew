@@ -1,12 +1,10 @@
 package com.reselling.visionary.ui.signup
 
-import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
 import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.reselling.visionary.R
 import com.reselling.visionary.databinding.FragmentSignupBinding
 import com.reselling.visionary.ui.MainActivity
-import com.reselling.visionary.utils.internetExceptionString
 import com.reselling.visionary.utils.move
 import com.reselling.visionary.utils.snackBar
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,6 +25,7 @@ private const val TAG = "SignUpFragment"
 @AndroidEntryPoint
 class SignUpFragment : Fragment(R.layout.fragment_signup) {
 
+    /*Creating Binding and viewModel using property delegates*/
     private val viewModel: SignUpViewModel by activityViewModels()
     private val binding: FragmentSignupBinding by viewBinding()
 
@@ -37,37 +35,20 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
 
         binding.apply {
 
-            etName.setText(viewModel.name)
-            etMobile.setText(viewModel.phoneNumber)
-            etPassword.setText(viewModel.password)
-            edEmail.setText(viewModel.email)
-            ccpCountryCode.setDefaultCountryUsingNameCode(viewModel.countryCode)
+            ccpCountryCode.setDefaultCountryUsingNameCode("IN")
 
-
-            etName.addTextChangedListener {
-                viewModel.name = it.toString()
-            }
-
-            etMobile.addTextChangedListener {
-                viewModel.phoneNumber = it.toString()
-            }
-
-            etPassword.addTextChangedListener {
-                viewModel.password = it.toString()
-            }
-
-            edEmail.addTextChangedListener {
-                viewModel.email = it.toString()
-            }
-
-            ccpCountryCode.setOnCountryChangeListener {
-                viewModel.countryCode = ccpCountryCode.selectedCountryCode
-            }
-
+            /*On Click of SingUp Button Send SignUp Request*/
             btnSignup.setOnClickListener {
-                viewModel.signUpBtnClicked()
+                viewModel.signUpBtnClicked(
+                    name = etName.text.toString(),
+                    phoneNumber = etMobile.text.toString(),
+                    password = etMobile.text.toString(),
+                    countryCode = ccpCountryCode.selectedCountryCode,
+                    email = edEmail.text.toString(),
+                )
             }
 
+            /*On Click of SingIn Button Go to SignUp Page*/
             signInTv.setOnClickListener {
 
                 findNavController().navigate(
@@ -100,28 +81,9 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
 
                     }
 
-                    is SignUpViewModel.SignUpFragmentEvents.NavigateToVerifyCodeFragment -> {
-                        SignUpFragmentDirections.actionSignUpFragmentToVerifyCodeFragment().apply {
-                            findNavController().navigate(this)
-                        }
-
-
+                    else -> {
+                        Log.e(TAG, "onViewCreated: Else Branch of Observing Channel")
                     }
-                    is SignUpViewModel.SignUpFragmentEvents.ObserveSignUpResponse -> {
-                        viewModel.handelSignUpResponse(it.response)
-                    }
-
-                    is SignUpViewModel.SignUpFragmentEvents.InternetProblem -> {
-                        requireView().snackBar(internetExceptionString, "Turn On") { snackBar ->
-                            try {
-                                startActivity(Intent(Settings.ACTION_DATA_ROAMING_SETTINGS))
-                                snackBar.build().dismiss()
-                            } catch (e: Exception) {
-                            }
-
-                        }
-                    }
-
 
                 }
             }
