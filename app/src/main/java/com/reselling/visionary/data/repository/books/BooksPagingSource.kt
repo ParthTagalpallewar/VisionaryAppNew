@@ -12,7 +12,7 @@ private const val Book_STARTING_PAGE_INDEX = 0
 class BooksPagingSource(
         private val userId: String,
         private val query: String,
-        private val district: String,
+        private val district: String?,
         private val booksApi: BooksApi
         ) : PagingSource<Int, Books>() {
 

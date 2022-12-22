@@ -8,9 +8,12 @@
         <entry key="..\:/PlayStoreAppsProjects/BookResslingAppMvvM/VisionaryApp/app/src/main/res/layout/activity_auth.xml" value="0.152" />
         <entry key="..\:/PlayStoreAppsProjects/BookResslingAppMvvM/VisionaryApp/app/src/main/res/layout/activity_main.xml" value="0.20462962962962963" />
         <entry key="..\:/PlayStoreAppsProjects/BookResslingAppMvvM/VisionaryApp/app/src/main/res/layout/book_load_state_footer.xml" value="0.20462962962962963" />
-        <entry key="..\:/PlayStoreAppsProjects/BookResslingAppMvvM/VisionaryApp/app/src/main/res/layout/fragment_add_book.xml" value="0.152" />
+        <entry key="..\:/PlayStoreAppsProjects/BookResslingAppMvvM/VisionaryApp/app/src/main/res/layout/fragment_add_book.xml" value="0.264" />
+        <entry key="..\:/PlayStoreAppsProjects/BookResslingAppMvvM/VisionaryApp/app/src/main/res/layout/fragment_base_home.xml" value="0.26205128205128203" />
         <entry key="..\:/PlayStoreAppsProjects/BookResslingAppMvvM/VisionaryApp/app/src/main/res/layout/fragment_forgot_password_manual.xml" value="0.18888888888888888" />
         <entry key="..\:/PlayStoreAppsProjects/BookResslingAppMvvM/VisionaryApp/app/src/main/res/layout/fragment_home_category_books.xml" value="0.175" />
+        <entry key="..\:/PlayStoreAppsProjects/BookResslingAppMvvM/VisionaryApp/app/src/main/res/layout/fragment_home_seller_details.xml" value="0.2324074074074074" />
+        <entry key="..\:/PlayStoreAppsProjects/BookResslingAppMvvM/VisionaryApp/app/src/main/res/layout/fragment_location_gps.xml" value="0.2324074074074074" />
         <entry key="..\:/PlayStoreAppsProjects/BookResslingAppMvvM/VisionaryApp/app/src/main/res/layout/fragment_login.xml" value="0.176" />
         <entry key="..\:/PlayStoreAppsProjects/BookResslingAppMvvM/VisionaryApp/app/src/main/res/layout/fragment_signup.xml" value="0.264" />
         <entry key="..\:/PlayStoreAppsProjects/BookResslingAppMvvM/VisionaryApp/app/src/main/res/layout/fragment_splash.xml" value="0.1925925925925926" />

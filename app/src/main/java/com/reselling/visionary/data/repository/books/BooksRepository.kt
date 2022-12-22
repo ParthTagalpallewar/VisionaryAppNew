@@ -26,7 +26,7 @@ class BooksRepository @Inject constructor(
         limit: String,
         query: String,
         userId: String,
-        district: String
+        district: String?
     ): Resource<BooksResponseModel> =
 
         apiRequest {
@@ -42,7 +42,7 @@ class BooksRepository @Inject constructor(
     fun getSearchResults(
         query: String,
         userId: String,
-        district: String
+        district: String?
     ): LiveData<PagingData<Books>> {
 
      //   Log.e("Searcing", "query $query")

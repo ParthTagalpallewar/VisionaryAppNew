@@ -16,12 +16,7 @@ class HomeViewModel @Inject constructor(
         private val bookRepo: BooksRepository,
         private val userRepository: AuthRepository,
         private val state: SavedStateHandle,
-        private val preferencesManager: PreferencesManager
 ) : ViewModel() {
-
-
-
-
 
 
     val searchQuery = state.getLiveData("searchQuery", "")
@@ -30,11 +25,7 @@ class HomeViewModel @Inject constructor(
         searchQuery.value = query
     }
 
-    val user: Flow<User?> = userRepository.getUserFlow()
-
-    val userFromPrefManager = preferencesManager.preferenceFlow
-
-
+    val user: Flow<User> = userRepository.getUserFlow()
 
     private val booksFlow = combine(
             searchQuery.asFlow(),
@@ -44,12 +35,12 @@ class HomeViewModel @Inject constructor(
     }.flatMapLatest { (query, user) ->
 
         flow {
-            if (user != null) {
                 val flow = bookRepo.getBooksInHome("10", query, user.id, user.district)
                 emit(flow)
-            }
+
         }
     }
+
     val booksLiveData = booksFlow.asLiveData()
 
 

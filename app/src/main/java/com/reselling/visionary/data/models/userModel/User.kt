@@ -3,7 +3,6 @@ package com.reselling.visionary.data.models.userModel
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.reselling.visionary.utils.UserNoLocation
 import kotlinx.android.parcel.Parcelize
 
 
@@ -19,13 +18,15 @@ data class User(
         val email: String,
         val phone: String,
         val password: String,
-        val country: String = "",
-        val state: String = "",
-        val city: String ="",
-        val location: String = UserNoLocation,
-        val address: String = "Not Selected Yet",
-        val district: String = "",
+        val country: String?,
+        val state: String?,
+        val city: String?,
+        val location: String?,
+        val address: String?,
+        val district: String?,
 
         @PrimaryKey(autoGenerate = false)
         val Uid: Int = UserDefaultDatabaseId
-): Parcelable
+): Parcelable{
+        val getUserAddress get() = address ?: "Location Not Selected"
+}

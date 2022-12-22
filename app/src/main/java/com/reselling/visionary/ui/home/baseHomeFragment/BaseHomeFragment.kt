@@ -1,5 +1,6 @@
 package com.reselling.visionary.ui.home.baseHomeFragment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
@@ -16,7 +17,6 @@ import com.reselling.visionary.R
 import com.reselling.visionary.data.models.books.Books
 import com.reselling.visionary.data.network.networkResponseType.Resource
 import com.reselling.visionary.databinding.FragmentBaseHomeBinding
-import com.reselling.visionary.ui.splash.SplashScreen
 import com.reselling.visionary.utils.*
 import kotlinx.coroutines.flow.collect
 
@@ -27,9 +27,11 @@ class BaseHomeFragment : Fragment(R.layout.fragment_base_home),
 
     private val viewModel: HomeViewModel by activityViewModels()
     private val binding: FragmentBaseHomeBinding by viewBinding()
-    private lateinit var mAdapter: HomeBooksAdapter
-    private lateinit var mCategoryAdapter: HomeCategoryAdapter
 
+    private lateinit var mAdapter: HomeBooksAdapter // recycler adapter for showing books
+    private lateinit var mCategoryAdapter: HomeCategoryAdapter //recycler adapter for showing categories
+
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -76,10 +78,10 @@ class BaseHomeFragment : Fragment(R.layout.fragment_base_home),
 
         }
 
-        //category
+        //adding categories in categories recycler view
         mCategoryAdapter.submitList(homeCategories)
 
-        //user live location
+        // live data of all books
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.booksLiveData.observe(viewLifecycleOwner) {
 
@@ -87,10 +89,8 @@ class BaseHomeFragment : Fragment(R.layout.fragment_base_home),
 
                 when (it) {
                     is Resource.Success -> {
-
                         binding.noBooksTextView.isVisible = it.value.books.size <= 0
                         mAdapter.submitList(it.value.books)
-
 
                     }
 
@@ -98,101 +98,32 @@ class BaseHomeFragment : Fragment(R.layout.fragment_base_home),
                         requireView().snackBar(it.errorBody)
                     }
 
-                    is Resource.NoInterException -> {
-                        var a = true
-                        if (a) {
-                            requireView().snackBar(internetExceptionString, "Turn On") { snackBar ->
-                                try {
-                                    startActivity(Intent(Settings.ACTION_DATA_ROAMING_SETTINGS))
-                                    snackBar.build().dismiss()
-                                    a = false
-                                } catch (e: Exception) {
-                                }
-                            }
-                        }
-
-                    }
-
                 }
             }
 
-            viewModel.user.collect {
-                binding.userLocation.text = it?.address
+            // getting user address from root and setting it on address textView
+            viewModel.user.collect { user ->
+                binding.userLocation.text = user.getUserAddress
             }
-
-        }
-
-        //books
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.booksLiveData.observe(viewLifecycleOwner) {
-
-                binding.progressBar.visible(false)
-
-                when (it) {
-                    is Resource.Success -> {
-
-                        binding.noBooksTextView.isVisible = it.value.books.size <= 0
-                        mAdapter.submitList(it.value.books)
-
-
-                    }
-
-                    is Resource.Failure -> {
-                        requireView().snackBar(it.errorBody)
-                    }
-
-                    is Resource.NoInterException -> {
-//                        Log.e(TAG, "onViewCreated: Observe No Internet")
-                        requireView().snackBar(internetExceptionString, "Turn On") { snackBar ->
-                            try {
-                                startActivity(Intent(Settings.ACTION_DATA_ROAMING_SETTINGS))
-                                snackBar.build().dismiss()
-                            } catch (e: Exception) {
-                            }
-
-                        }
-                    }
-
-                }
-            }
-
-
 
         }
 
     }
-
-    override fun onStart() {
-        super.onStart()
-
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.userFromPrefManager.collect {
-                when {
-                    (it.location == UserNoLocation) or (it.location == "NO") -> {
-                        BaseHomeFragmentDirections.actionHomeFragmentToGpsFragment().apply {
-                            findNavController().navigate(this)
-                        }
-                    }
-
-                }
-            }
-        }
-    }
-
-
 
     override fun onPause() {
         super.onPause()
         viewModel.searchBook("")
     }
 
-
-
+    // handle click of book item of book recycler view
     override fun onBookClicked(book: Books) {
         BaseHomeFragmentDirections.actionHomeFragmentToHomeBookDetails(book).apply {
             findNavController().navigate(this)
         }
     }
+
+
+    // handle click of category item of category recycler view
     override fun onCategoryItemClicked(name: String) {
         BaseHomeFragmentDirections.actionHomeFragmentToCategoryBooks(name).apply {
             findNavController().navigate(this)

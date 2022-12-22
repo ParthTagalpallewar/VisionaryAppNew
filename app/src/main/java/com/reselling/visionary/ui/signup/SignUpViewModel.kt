@@ -50,7 +50,7 @@ class SignUpViewModel @Inject constructor(
                 is Resource.Success -> {
 
                     //adding user to room
-                    authRepository.insertUser(response.value.user).also {
+                    authRepository.insertUser(response.value).also {
 
                         //moving to Home fragment
                         _signUpTaskEventChannel.send(SignUpFragmentEvents.NavigateToHomeFragment)

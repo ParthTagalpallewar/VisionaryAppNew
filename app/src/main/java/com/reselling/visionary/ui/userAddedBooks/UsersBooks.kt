@@ -23,7 +23,6 @@ import com.reselling.visionary.databinding.FragmentUserAddedBooksBinding
 import com.reselling.visionary.utils.internetExceptionString
 import com.reselling.visionary.utils.snackBar
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 private const val TAG = "UsersBooks"
 
@@ -141,11 +140,11 @@ class UsersBooks : Fragment(R.layout.fragment_user_added_books),
 
                 AlertDialog.Builder(requireContext())
                         .setTitle("Do Your Really Want to Delete Book")
-                        .setPositiveButton("Yes") { dialogInterface, onclick ->
+                        .setPositiveButton("Yes") { _, _ ->
                             viewModel.deleteBook(book.id)
                             dismiss()
-                        }.setNegativeButton("No") { Dinterface, onClicked ->
-                            Dinterface.dismiss()
+                        }.setNegativeButton("No") { dialog, _ ->
+                            dialog.dismiss()
                             dismiss()
                         }.show()
 

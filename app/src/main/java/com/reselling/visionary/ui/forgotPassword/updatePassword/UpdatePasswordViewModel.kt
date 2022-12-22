@@ -2,8 +2,6 @@ package com.reselling.visionary.ui.forgotPassword.updatePassword
 
 import android.util.Log
 import androidx.lifecycle.*
-import androidx.room.Update
-import com.reselling.visionary.data.models.userModel.UserResponseModel
 import com.reselling.visionary.data.network.networkResponseType.Resource
 import com.reselling.visionary.data.preferences.PreferencesManager
 import com.reselling.visionary.data.repository.AuthRepository

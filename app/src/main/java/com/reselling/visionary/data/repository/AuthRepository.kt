@@ -4,7 +4,6 @@ import com.reselling.visionary.data.network.apis.AuthApi
 import com.reselling.visionary.data.network.apis.DataApi
 import com.reselling.visionary.data.network.networkResponseType.MySafeApiRequest
 import com.reselling.visionary.data.models.userModel.User
-import com.reselling.visionary.data.models.userModel.UserResponseModel
 import com.reselling.visionary.data.network.apis.UserOperationsApi
 import com.reselling.visionary.data.network.networkResponseType.Resource
 import com.reselling.visionary.data.room.dao.UserDao

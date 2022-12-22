@@ -47,7 +47,7 @@ class LoginViewModel @Inject constructor(
 
                     is Resource.Success -> {
                         //update user in room
-                        authRepository.insertUser(signUpResponse.value.user)
+                        authRepository.insertUser(signUpResponse.value)
 
                         //move to MainFragment
                         loginTaskEventChannel.send(LoginFragmentEvent.NavigateToMainFragment)

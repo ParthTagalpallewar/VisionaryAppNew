@@ -3,12 +3,10 @@ package com.reselling.visionary.ui.home.homeBookDetails
 import androidx.lifecycle.*
 import com.reselling.visionary.data.models.books.Books
 import com.reselling.visionary.data.models.books.BooksResponseModel
-import com.reselling.visionary.data.models.userModel.UserResponseModel
+import com.reselling.visionary.data.models.userModel.User
 import com.reselling.visionary.data.network.networkResponseType.Resource
 import com.reselling.visionary.data.repository.BookRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,7 +18,7 @@ class HomeBookDetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     val books = MutableLiveData<Books>()
-    val seller = MutableLiveData<Resource<UserResponseModel>>()
+    val seller = MutableLiveData<Resource<User>>()
     val sellerBooks = MutableLiveData<Resource<BooksResponseModel>>()
 
 

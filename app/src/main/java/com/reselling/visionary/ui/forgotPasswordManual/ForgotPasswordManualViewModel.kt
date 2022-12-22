@@ -1,16 +1,10 @@
 package com.reselling.visionary.ui.forgotPasswordManual
 
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.reselling.visionary.data.models.userModel.UserResponseModel
-import com.reselling.visionary.data.network.apis.UserOperationsApi
 import com.reselling.visionary.data.network.networkResponseType.Resource
 import com.reselling.visionary.data.preferences.PreferencesManager
 import com.reselling.visionary.data.repository.AuthRepository
-import com.reselling.visionary.ui.signup.SignUpViewModel
-import com.reselling.visionary.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow

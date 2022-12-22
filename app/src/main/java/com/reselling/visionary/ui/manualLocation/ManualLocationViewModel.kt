@@ -6,13 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.reselling.visionary.data.models.manualLocation.ManualLocation
 import com.reselling.visionary.data.models.userModel.User
-import com.reselling.visionary.data.models.userModel.UserResponseModel
 import com.reselling.visionary.data.network.networkResponseType.Resource
 import com.reselling.visionary.data.preferences.PreferencesManager
 import com.reselling.visionary.data.repository.AuthRepository
 import com.reselling.visionary.data.repository.LocationRepository
 import com.reselling.visionary.data.repository.ManualLocationRepository
-import com.reselling.visionary.utils.getLocation
 import com.reselling.visionary.utils.internetExceptionString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

@@ -3,14 +3,11 @@ package com.reselling.visionary.ui.home.homeBookDetails
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.tabs.TabLayoutMediator
@@ -69,7 +66,7 @@ class HomeDetailsBase : Fragment(R.layout.fragment_home_details_base) {
         viewModel.seller.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
-                    val seller = it.value.user
+                    val seller = it.value
                     binding.apply {
                         contactSeller(seller)
                     }

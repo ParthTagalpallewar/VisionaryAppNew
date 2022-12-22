@@ -26,7 +26,3 @@ fun saveConstants(boolean: Boolean, provider: String) {
 //val VISIONARY_BASE_URL = "https://digitdeveloper.online/visionary/welcome/"
 
 //val VISIONARY_BASE_URL = "http://192.168.43.146/book_selling_app_api/Welcome/"Aval
-
-
-val UserNoLocation = "0"
-val UserLogOutId = "-1"

@@ -1,6 +1,5 @@
 package com.reselling.visionary.data.network.apis
 
-import com.reselling.visionary.data.models.userModel.UserResponseModel
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

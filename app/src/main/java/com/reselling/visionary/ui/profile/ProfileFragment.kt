@@ -2,12 +2,10 @@ package com.reselling.visionary.ui.profile
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.reselling.visionary.R
 import com.reselling.visionary.databinding.FragmentProfileBinding
@@ -15,9 +13,7 @@ import com.reselling.visionary.ui.auth.AuthActivity
 import com.reselling.visionary.utils.move
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import okhttp3.internal.notifyAll
 
-private const val TAG = "ProfileFragment"
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -30,18 +26,21 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         binding = FragmentProfileBinding.bind(view)
 
         binding.logoutBtn.setOnClickListener {
+
+            // alert dialog for logout conformation
             AlertDialog.Builder(requireContext())
                     .setTitle("Do Your Really Want to Logout?")
-                    .setPositiveButton("Yes") { dialogInterface, onclick ->
-                        viewModel.logOutUser()
-                    }.setNegativeButton("No") { Dinterface, onClicked ->
-                        Dinterface.dismiss()
+                    .setPositiveButton("Yes") { _, _ ->
+                        viewModel.logOutUser() // on click of yes logout user
+                    }.setNegativeButton("No") { dialog, _ ->
+                        dialog.dismiss() // on click of no btn dismiss dialog
                     }.show()
 
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.userData.observe(viewLifecycleOwner) {
+            // get user data form database and show
+            viewModel.userData.collect{
                 binding.apply {
                     userEmail.text = it.email
 
@@ -49,9 +48,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                     userNameBottom.text = it.name
 
                     userPhone.text = it.phone
-                    userAddress.text = it.address
+                    userAddress.text = it.getUserAddress
 
-                    userAddedBooks.text = it.country
+                    userAddedBooks.text = it.country ?: "Not Found"
                 }
             }
 
@@ -62,9 +61,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
                         if (findNavController().currentDestination?.id == R.id.navigation_profile) {
                             requireActivity().move(AuthActivity::class.java)
-                            /*findNavController().navigate(R.id.action_navigation_profile_to_loginFragment,
-                                    null,
-                                    NavOptions.Builder().setPopUpTo(R.id.navigation_profile, true).build())*/
+
                         }
 
                     }

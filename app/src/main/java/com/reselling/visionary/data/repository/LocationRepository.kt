@@ -7,25 +7,14 @@ import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import androidx.core.app.ActivityCompat
-import androidx.datastore.DataStore
-import com.reselling.visionary.data.models.location.AddressLocationModel
 import com.reselling.visionary.data.models.manualLocation.ManualLocation
 import com.reselling.visionary.data.models.userModel.User
-import com.reselling.visionary.data.models.userModel.UserResponseModel
 import com.reselling.visionary.data.network.apis.LocationApi
-import com.reselling.visionary.data.network.apis.ManualLocationApi
 import com.reselling.visionary.data.network.networkResponseType.MySafeApiRequest
-import com.reselling.visionary.data.preferences.PreferencesManager
 import com.reselling.visionary.utils.plus
-import com.reselling.visionary.utils.setUpLocationAlertDialogue
-import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.io.IOException
-import java.security.Permission
-import java.security.Permissions
-import java.util.*
 import javax.inject.Inject
 
 
@@ -101,7 +90,7 @@ class LocationRepository @Inject constructor(
     }
 
     suspend fun updateUserWithLocationInNetwork(user: User) = apiRequest {
-        val unknown: String = "Unknown"
+        val unknown = "Unknown"
         locationApi.updateUserLocation(
                 id = user.id,
                 country = user.country ?: unknown,

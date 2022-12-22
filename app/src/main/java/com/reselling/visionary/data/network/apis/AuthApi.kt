@@ -1,17 +1,17 @@
 package com.reselling.visionary.data.network.apis
 
-import com.reselling.visionary.data.models.userModel.UserResponseModel
+import com.reselling.visionary.data.models.userModel.User
 import retrofit2.Response
 import retrofit2.http.*
 
 interface AuthApi {
 
-    @FormUrlEncoded
+        @FormUrlEncoded
     @POST("loginUser")
     suspend fun login(
             @Field("phone") phone:String,
             @Field("password") password:String,
-    ):Response<UserResponseModel>
+    ):Response<User>
 
     //Auth
     @FormUrlEncoded
@@ -21,7 +21,7 @@ interface AuthApi {
             @Field("password") password: String,
             @Field("name") name: String,
             @Field("email") email: String
-    ) : Response<UserResponseModel>
+    ) : Response<User>
 
 
 

@@ -1,7 +1,7 @@
 package com.reselling.visionary.data.network.apis
 
 import com.reselling.visionary.data.models.books.BooksResponseModel
-import com.reselling.visionary.data.models.userModel.UserResponseModel
+import com.reselling.visionary.data.models.userModel.User
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -19,7 +19,7 @@ interface BooksApi {
     suspend fun getBooksUsingPaging(
         @Query("limit") per_page: Int,
         @Query("start") page: Int,
-        @Query("district") district: String,
+        @Query("district") district: String?,
         @Query("id") userId: String,
         @Query("query") query: String,
     ): BooksResponseModel
@@ -29,7 +29,7 @@ interface BooksApi {
     suspend fun getBooksInHome(
         @Query("limit") per_page: Int,
         @Query("start") page: Int = 0,
-        @Query("district") district: String,
+        @Query("district") district: String?,
         @Query("id") userId: String,
         @Query("query") query: String,
     ): Response<BooksResponseModel>
@@ -72,6 +72,6 @@ interface BooksApi {
     @POST("getSellerById")
     suspend fun getSellerById(
         @Field("sellerId") sellerId: String,
-    ): Response<UserResponseModel>
+    ): Response<User>
 
 }

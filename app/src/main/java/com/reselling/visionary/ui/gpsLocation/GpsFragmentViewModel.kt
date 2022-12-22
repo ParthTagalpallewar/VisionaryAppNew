@@ -9,21 +9,14 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.reselling.visionary.data.models.userModel.User
-import com.reselling.visionary.data.models.userModel.UserResponseModel
 import com.reselling.visionary.data.network.networkResponseType.Resource
-import com.reselling.visionary.data.preferences.PreferencesManager
 import com.reselling.visionary.data.repository.AuthRepository
 import com.reselling.visionary.data.repository.LocationRepository
-import com.reselling.visionary.utils.Constants
 import com.reselling.visionary.utils.Constants.Companion.LocationProviderConstant
-import com.reselling.visionary.utils.getLocation
-import com.reselling.visionary.utils.saveConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.io.IOException
 import javax.inject.Inject
 
@@ -32,25 +25,12 @@ private const val TAG = "GpsFragmentViewModel"
 
 @HiltViewModel
 class GpsFragmentViewModel @Inject constructor(
-        private val locationRepository: LocationRepository,
-        private val preferencesManager: PreferencesManager,
-        private val authRepository: AuthRepository,
-        private val locationManager: LocationManager
+    private val locationRepository: LocationRepository,
+    private val authRepository: AuthRepository,
+    private val locationManager: LocationManager
 ) : ViewModel(), LocationListener {
 
-    init {
-        viewModelScope.launch {
-            val constantsResponse = authRepository.getConstants()
 
-            when (constantsResponse) {
-                is Resource.Success -> {
-                    val constants: com.reselling.visionary.data.models.dataModels.Constants = constantsResponse.value.constants
-                    saveConstants(constants.enablePhoneVerification, constants.getProvider)
-
-                }
-            }
-        }
-    }
 
     var doesUpdateNeeded = true
 
@@ -79,10 +59,10 @@ class GpsFragmentViewModel @Inject constructor(
 
                     //request location
                     locationManager.requestLocationUpdates(
-                            Constants.LocationProviderConstant,
-                            0,
-                            100000f,
-                            this@GpsFragmentViewModel
+                        LocationProviderConstant,
+                        0,
+                        100000f,
+                        this@GpsFragmentViewModel
                     )
                 }
             }
@@ -91,9 +71,9 @@ class GpsFragmentViewModel @Inject constructor(
                 viewModelScope.launch {
 
                     _gpsLocationFragmentChannel.send(
-                            GpsLocationEvents.RequestPermission(
-                                    locationRepository.arrayLocationPermissions
-                            )
+                        GpsLocationEvents.RequestPermission(
+                            locationRepository.arrayLocationPermissions
+                        )
                     )
 
                 }
@@ -119,10 +99,12 @@ class GpsFragmentViewModel @Inject constructor(
 
                 _gpsLocationFragmentChannel.send(GpsLocationEvents.LoadingEvent)
                 //add user in network and send to fragment and fragment call handelResponseOfLocationUpdate
+
+                val userData = locationRepository.updateUserWithLocationInNetwork(userWithAddress)
                 _gpsLocationFragmentChannel.send(
-                        GpsLocationEvents.ObserveLiveDataUpdateResponse(
-                                locationRepository.updateUserWithLocationInNetwork(userWithAddress)
-                        )
+                    GpsLocationEvents.ObserveLiveDataUpdateResponse(
+                       locationRepository.updateUserWithLocationInNetwork(userWithAddress)
+                    )
                 )
 
 
@@ -134,9 +116,9 @@ class GpsFragmentViewModel @Inject constructor(
 
                         val errorString = "Not Finding Your Location, Please Get Manually"
                         _gpsLocationFragmentChannel.send(
-                                GpsLocationEvents.ShowInvalidInputMessage(
-                                        errorString
-                                )
+                            GpsLocationEvents.ShowInvalidInputMessage(
+                                errorString
+                            )
                         )
                     }
 
@@ -145,9 +127,9 @@ class GpsFragmentViewModel @Inject constructor(
 
                         val errorString = "Not Finding Your Location, Please Get Manually"
                         _gpsLocationFragmentChannel.send(
-                                GpsLocationEvents.ShowInvalidInputMessage(
-                                        errorString
-                                )
+                            GpsLocationEvents.ShowInvalidInputMessage(
+                                errorString
+                            )
                         )
                     }
 
@@ -181,36 +163,26 @@ class GpsFragmentViewModel @Inject constructor(
         }
     }
 
-    fun handelResponseOnUpdatedLocation(resorce: Resource<UserResponseModel>?) =
-            viewModelScope.launch {
-                when (resorce) {
-                    is Resource.NoInterException ->
-                        _gpsLocationFragmentChannel.send(GpsLocationEvents.InternetProblem)
-                    is Resource.Failure -> {
-                        showInvalidInputMessage("Error ${resorce.errorCode} - ${resorce.errorBody}")
-
-                    }
-
-                    is Resource.Success -> {
-                        withContext(Dispatchers.IO) {
-                            //adding user to database and pref manager
-                            resorce.value.apply {
-                                authRepository.updateUser(user).also {
-                                    val location = user.location.getLocation()
-                                    preferencesManager.updateUserLoc("${location[0]},${location[1]}")
-                                    //send to main Fragment
-                                    _gpsLocationFragmentChannel.send(GpsLocationEvents.NavigateToMainFragment)
-                                }
-                            }
-
-                        }
-
-                    }
-
-
-//                    else -> Log.wtf("LoginFragment", "Going to else")
+    fun handelResponseOnUpdatedLocation(userResource: Resource<User>?) =
+        viewModelScope.launch {
+            when (userResource) {
+                is Resource.NoInterException ->
+                    _gpsLocationFragmentChannel.send(GpsLocationEvents.InternetProblem)
+                is Resource.Failure -> {
+                    showInvalidInputMessage("Error ${userResource.errorCode} - ${userResource.errorBody}")
                 }
+
+                is Resource.Success -> {
+
+                    authRepository.updateUser(userResource.value)
+
+                    _gpsLocationFragmentChannel.send(GpsLocationEvents.NavigateToMainFragment)
+
+                }
+
+
             }
+        }
 
     private val _gpsLocationFragmentChannel = Channel<GpsLocationEvents>()
     val gpsEvent = _gpsLocationFragmentChannel.receiveAsFlow()
@@ -225,8 +197,8 @@ class GpsFragmentViewModel @Inject constructor(
         object LoadingEvent : GpsLocationEvents()
         object NavigateToMainFragment : GpsLocationEvents()
         data class RequestPermission(val permissions: Array<String>) : GpsLocationEvents()
-        data class ObserveLiveDataUpdateResponse(val response: Resource<UserResponseModel>) :
-                GpsLocationEvents()
+        data class ObserveLiveDataUpdateResponse(val response: Resource<User>) :
+            GpsLocationEvents()
 
         object ReReqPermission : GpsLocationEvents()
         object InternetProblem : GpsLocationEvents()
